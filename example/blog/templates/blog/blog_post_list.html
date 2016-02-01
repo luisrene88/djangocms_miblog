@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load blog_tags %}
+{% block title %}{% trans 'Blog' %}{% endblock %}
+
+{% block content %}
+{% for post in post_list %}
+<h2>{{post.title}}</h2>
+<div class="meta">
+    <ul>
+        <li>{% for category in post.categories.all %}{{category}}, {% if forloop.last %}{{category}}{% endif %}{% endfor %}</li>
+        <li>{{post.pub_date}}</li>
+
+    </ul>
+    <p>
+        {{post.body|safe|truncatewords:TRUNCWORDS_COUNT}}
+    </p>
+</div>
+{% endfor %}
+{% if is_paginated %}
+<div class="pagination-blog">
+    {% if page_obj.has_previous %}
+    <a href="?{{ view.page_kwarg }}={{ page_obj.previous_page_number }}" class="prevposts-link transition"><i class="fa fa-chevron-left"></i></a>
+    {% endif %}
+    {% for page in paginator.page_range %}
+    <a href="?page={{ page }}" class="blog-page {% if page == page_obj.number %}current-page{% endif %} transition">{{page}}</a>
+    {% endfor %}
+
+
+    {% if page_obj.has_next %}
+    <a href="?{{ view.page_kwarg }}={{ page_obj.next_page_number }}" class="nextposts-link transition"><i class="fa fa-chevron-right"></i></a>
+    {% endif %}
+</div>
+{% endif %}
+
+<div class="col-md-4">
+    <div class="sidebar">
+        <!-- widget -->
+        <div class="widget">
+            {% get_latest_post 5 %}
+        </div>
+        <!-- widget -->
+        <div class="widget">
+            {% list_post_categories %}
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+
