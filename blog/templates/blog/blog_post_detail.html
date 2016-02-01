@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %}{{post.title}}{% endblock %}
+
+{% block content %}
+Some vars enabled :
+<br/>
+<ul>
+     <li>title</li>
+     <li>pub_date [Date]</li>
+     <li>edit_date [Date]</li>
+     <li>categories [Array]</li>
+     <li>tags [Array]</li>
+     <li>picture [urlFile]</li>
+     <li>body [HTMLField]</li>
+     <li>start_date [date]</li>
+     <li>end_date [date]</li>
+</ul>
+<h2>Previous or Next</h2>
+<p>For get previous post use "post.get_previous_post"</p>
+<p>For get next post use "post.get_next_post"</p>
+
+<h2>Previous or Next</h2>
+{% if post.get_next_post %}
+<a href="{{ post.get_next_post }}"> Next Post</a>
+{% endif %}
+
+{% if post.get_previous_post %}
+<a href="{{ post.get_previous_post }}"> Previous Post</a>
+{% endif %}
+{% endblock %}
+
