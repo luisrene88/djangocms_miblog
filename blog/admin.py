@@ -1,8 +1,16 @@
 # coding: utf-8
 
+# import contrib
 from django.contrib import admin
+
+# Import models
 from .models import CategoryPost, Post
+
+# Import django forms
 from django import forms
+
+# I18N
+from django.utils.translation import ugettext as _
 
 
 class PostForm(forms.ModelForm):
@@ -24,10 +32,10 @@ class PostAdmin(admin.ModelAdmin):
     filter_horizontal = ('categories',)
     form = PostForm
     fieldsets = (
-        ('Information', {
+        (_('Information'), {
             'fields': ('title', 'slug', 'categories', 'tags', 'picture' )
         }),
-        ('Rédaction', {
+        (_('Writing'), {
             'fields': ('body', )
         }),
         ('Publication', {

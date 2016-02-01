@@ -21,12 +21,12 @@ class BlogToolbar(CMSToolbar):
         url_add_category = reverse('admin:blog_categorypost_add')
 
         # Posts
-        admin_menu.add_sideframe_item(_('Ajouter un article'), url=url_add_post)
-        admin_menu.add_sideframe_item(_('Liste des articles'), url=url_list_post)
+        admin_menu.add_sideframe_item(_('Add post'), url=url_add_post)
+        admin_menu.add_sideframe_item(_('Post list'), url=url_list_post)
         admin_menu.add_break()
 
         # Categories
-        admin_menu.add_sideframe_item(_('Ajouter une catégorie'), url=url_add_category)
-        admin_menu.add_sideframe_item(_('Liste des catégories'), url=url_list_category)
+        admin_menu.add_sideframe_item(_('Add category'), url=url_add_category)
+        admin_menu.add_sideframe_item(_('Categories list'), url=url_list_category)
         admin_menu.add_break()
 

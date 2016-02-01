@@ -1,42 +1,50 @@
 # coding: utf-8
 
+# Django DB
 from django.db import models
+
+# Django Taggit
 from taggit.managers import TaggableManager
+
+# Django CKEditor
 from djangocms_text_ckeditor.fields import HTMLField
+
+# Django Filer
 from filer.fields.image import FilerImageField
 
 # Reverse
 from django.core.urlresolvers import reverse
 
+# I18N
+from django.utils.translation import ugettext as _
+
 
 class CategoryPost(models.Model):
-    title = models.CharField('Titre', max_length=255)
+    title = models.CharField(_('Title'), max_length=255)
     slug = models.SlugField()
 
     class Meta:
-        verbose_name = 'Catégorie'
-        verbose_name_plural = 'Catégories'
+        verbose_name = _('Category')
+        verbose_name_plural = _('Categories')
 
     def __str__(self):
         return self.title
 
 
 class Post(models.Model):
-    title = models.CharField("Titre de l'article", max_length=255)
+    title = models.CharField(_("Post title"), max_length=255)
     slug = models.SlugField()
-    pub_date = models.DateTimeField('Publié le', auto_now_add=True)
-    edit_date = models.DateTimeField('Dernière modification le', auto_now=True)
-    categories = models.ManyToManyField(CategoryPost, verbose_name="Catégories de l'article", related_name='post_categories')
+    pub_date = models.DateTimeField(_('Published on'), auto_now_add=True)
+    edit_date = models.DateTimeField(_('Edit on'), auto_now=True)
+    categories = models.ManyToManyField(CategoryPost, verbose_name=_("Categories"), related_name='post_categories')
     tags = TaggableManager()
-    picture = FilerImageField(verbose_name="Image d'en-tête")
-    body = HTMLField(verbose_name='Article')
-    start_date = models.DateTimeField(null=True, blank=True)
-    end_date = models.DateTimeField(null=True, blank=True)
-    is_publish = models.BooleanField("Publier ?", default=True)
+    picture = FilerImageField(verbose_name=_("Head picture"))
+    body = HTMLField(verbose_name=_('Post'))
+    is_publish = models.BooleanField(_("is publish ?"), default=True)
 
     class Meta:
-        verbose_name = 'Article de blog'
-        verbose_name_plural = 'Articles de blog'
+        verbose_name = _('Blog post')
+        verbose_name_plural = _('Blog posts')
 
     def __str__(self):
         return self.title

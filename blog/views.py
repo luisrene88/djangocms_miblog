@@ -1,6 +1,10 @@
-from django.shortcuts import render
+# Import Generic Views
 from django.views.generic import ListView, DetailView
+
+#import Models
 from .models import Post
+
+# import Settings
 from django.conf import settings
 
 
@@ -9,6 +13,10 @@ class BlogPostListView(ListView):
     template_name = 'blog/blog_post_list.html'
     paginate_by = settings.BLOG_PAGINATION
     context_object_name = 'post_list'
+
+    def get_queryset(self):
+        qs = super(BlogPostListView, self).get_queryset()
+        return qs.filter(is_publish=True)
 
     def get_context_data(self, **kwargs):
         context = super(BlogPostListView, self).get_context_data(**kwargs)
@@ -32,7 +40,7 @@ class TaggedListView(ListView):
 
     def get_queryset(self):
         qs = super(TaggedListView, self).get_queryset()
-        return qs.filter(tags__slug=self.kwargs['tag'])
+        return qs.filter(tags__slug=self.kwargs['tag'], is_publish=True)
 
     def get_context_data(self, **kwargs):
         kwargs['tagged_entries'] = (self.kwargs.get('tag')
@@ -52,7 +60,7 @@ class CategoryListView(ListView):
 
     def get_queryset(self):
         qs = super(CategoryListView, self).get_queryset()
-        return qs.filter(categories__slug=self.kwargs['category'])
+        return qs.filter(categories__slug=self.kwargs['category'], is_publish=True)
 
     def get_context_data(self, **kwargs):
         kwargs['category'] = (self.kwargs.get('category')
