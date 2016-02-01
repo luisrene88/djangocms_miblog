@@ -18,6 +18,6 @@ def get_latest_post(numbers_of_post):
 
 @register.inclusion_tag('blog/tags/post_categories.html')
 def list_post_categories():
-    categories = CategoryPost.objects.filter(is_publish=True).order_by('title')
+    categories = CategoryPost.objects.all().order_by('title')
     return {'categories': categories}
 

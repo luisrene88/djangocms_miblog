@@ -39,7 +39,7 @@ class PostAdmin(admin.ModelAdmin):
             'fields': ('body', )
         }),
         ('Publication', {
-            'fields': ('start_date', 'end_date', 'is_publish',)
+            'fields': ('is_publish',)
         }),
     )
 
