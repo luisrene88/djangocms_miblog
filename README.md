@@ -1,4 +1,6 @@
 =====
+
+[![Join the chat at https://gitter.im/Pyc0kw4k/djangocms_miblog](https://badges.gitter.im/Pyc0kw4k/djangocms_miblog.svg)](https://gitter.im/Pyc0kw4k/djangocms_miblog?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 djangocms_miblog
 =====
 
