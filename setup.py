@@ -23,6 +23,7 @@ setup(
     install_requires=(
         'django-filer',
         'django-taggit',
+        'django-search-listview',
     ),
     classifiers=[
         'Environment :: Web Environment',

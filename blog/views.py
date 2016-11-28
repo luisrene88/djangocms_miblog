@@ -6,6 +6,7 @@ from .models import Post
 
 # import Settings
 from django.conf import settings
+from search_listview.list import SearchableListView
 
 
 class BlogPostListView(ListView):
@@ -13,6 +14,10 @@ class BlogPostListView(ListView):
     template_name = 'blog/blog_post_list.html'
     paginate_by = settings.BLOG_PAGINATION
     context_object_name = 'post_list'
+    if hasattr(settings,'BLOG_SEARCH_FIELDS'):
+        searchable_fields = settings.BLOG_SEARCH_FILTER
+    if hasattr(settings,'BLOG_SEARCH_FILTERS'):
+        specifications = settings.BLOG_SEARCH_FILTERS
 
     def get_queryset(self):
         qs = super(BlogPostListView, self).get_queryset()
